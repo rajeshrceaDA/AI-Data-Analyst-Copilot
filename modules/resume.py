@@ -10,13 +10,24 @@ from utils.ai_engine import ask_ai
 
 def load_profile():
 
-    if not os.path.exists("master_profile.json"):
-        return None
+    # Personal Profile
+    if os.path.exists("master_profile.json"):
 
-    with open("master_profile.json", "r", encoding="utf-8") as file:
-        profile = json.load(file)
+        with open("master_profile.json", "r", encoding="utf-8") as file:
+            return json.load(file)
 
-    return profile
+    # Template Profile
+    if os.path.exists("master_profile_template.json"):
+
+        with open("master_profile_template.json", "r", encoding="utf-8") as file:
+            profile = json.load(file)
+
+        with open("master_profile.json", "w", encoding="utf-8") as f:
+            json.dump(profile, f, indent=4, ensure_ascii=False)
+
+        return profile
+
+    return None
 
 
 # =====================================================

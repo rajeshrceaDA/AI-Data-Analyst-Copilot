@@ -9,11 +9,23 @@ import os
 
 def load_profile():
 
+    # Personal Profile
     if os.path.exists("master_profile.json"):
 
         with open("master_profile.json", "r", encoding="utf-8") as file:
-
             return json.load(file)
+
+    # Template Profile
+    if os.path.exists("master_profile_template.json"):
+
+        with open("master_profile_template.json", "r", encoding="utf-8") as file:
+            profile = json.load(file)
+
+        # First time user ke liye automatically profile create
+        with open("master_profile.json", "w", encoding="utf-8") as file:
+            json.dump(profile, file, indent=4, ensure_ascii=False)
+
+        return profile
 
     return {}
 
