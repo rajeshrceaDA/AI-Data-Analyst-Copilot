@@ -3,32 +3,43 @@ from pathlib import Path
 from dotenv import load_dotenv
 from openai import OpenAI
 
-# Root folder
-BASE_DIR = Path(__file__).resolve().parent.parent
+# -----------------------------
+# Load Environment Variables
+# -----------------------------
 
-# Load .env
+BASE_DIR = Path(__file__).resolve().parent.parent
 load_dotenv(BASE_DIR / ".env")
 
-# Read API Key
-api_key = os.getenv("OPENROUTER_API_KEY")
+OPENROUTER_API_KEY = os.getenv("OPENROUTER_API_KEY")
 
+if not OPENROUTER_API_KEY:
+    raise Exception("OPENROUTER_API_KEY not found.")
 
-# Create OpenRouter Client
+# -----------------------------
+# OpenRouter Client
+# -----------------------------
+
 client = OpenAI(
-    api_key=api_key,
+    api_key=OPENROUTER_API_KEY,
     base_url="https://openrouter.ai/api/v1"
 )
 
-def ask_ai(prompt):
+# -----------------------------
+# AI Function
+# -----------------------------
+
+def ask_ai(messages):
 
     response = client.chat.completions.create(
-        model="openrouter/free",
-        messages=[
-            {
-                "role": "user",
-                "content": prompt
-            }
-        ]
+
+        model="deepseek/deepseek-v3.2",
+
+        messages=messages,
+
+        temperature=0.3,
+
+        max_tokens=1200,
+
     )
 
     return response.choices[0].message.content

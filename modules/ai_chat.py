@@ -63,29 +63,38 @@ def show_ai_chat():
 
             with st.spinner("Thinking..."):
 
-                system_prompt = """
-You are an Expert Senior Data Analyst.
+                messages = [
+                    {
+                        "role": "system",
+                        "content": """
+        You are an Expert Senior Data Analyst.
 
-Help users with:
+        Help users with:
 
-• SQL
-• MySQL
-• Power BI
-• DAX
-• Excel
-• Python
-• Statistics
-• Resume
-• ATS
-• Interview
-• Business Analysis
+        - SQL
+        - MySQL
+        - Power BI
+        - DAX
+        - Excel
+        - Python
+        - Statistics
+        - Resume
+        - ATS
+        - Interview Preparation
+        - Business Analysis
+        - Dashboard Design
 
-Always answer professionally with examples whenever possible.
-"""
+        Always answer in a practical, structured and beginner-friendly way.
+        Give examples whenever possible.
+        """
+                    }
+                ]
 
-                full_prompt = system_prompt + "\n\nUser:\n" + prompt
+                # Add complete conversation history
+                messages.extend(st.session_state.chat_history)
 
-                reply = ask_ai(full_prompt)
+                # Ask AI
+                reply = ask_ai(messages)
 
                 st.markdown(reply)
 
