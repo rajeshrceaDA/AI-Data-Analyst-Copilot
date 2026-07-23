@@ -2,6 +2,7 @@ import streamlit as st
 from modules.profile import show_profile
 from modules.resume import show_resume
 from modules.ats_checker import show_ats_checker
+from modules.ai_chat import show_ai_chat
 # ----------------------------
 # Page Configuration
 # -------------------
@@ -21,6 +22,7 @@ st.sidebar.title("📊 AI Data Analyst Copilot")
 menu = st.sidebar.radio(
     "Select Module",
     [
+        "🤖 AI Chat",
         "👤 My Profile",
         "🏠 Dashboard",
         "📄 Resume Generator",
@@ -35,7 +37,10 @@ menu = st.sidebar.radio(
 # ----------------------------
 # Dashboard
 # ----------------------------
-if menu == "👤 My Profile":
+if menu == "🤖 AI Chat":
+    show_ai_chat()
+
+elif menu == "👤 My Profile":
     show_profile()
     
 elif menu == "🏠 Dashboard":

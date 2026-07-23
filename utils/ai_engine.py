@@ -12,7 +12,6 @@ load_dotenv(BASE_DIR / ".env")
 # Read API Key
 api_key = os.getenv("OPENROUTER_API_KEY")
 
-print("API Key Loaded:", api_key[:15] + "..." if api_key else "Not Found")
 
 # Create OpenRouter Client
 client = OpenAI(
