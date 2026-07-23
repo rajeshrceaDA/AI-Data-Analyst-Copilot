@@ -1,0 +1,22 @@
+# Environment Variables
+.env
+
+# Python Cache
+__pycache__/
+*.pyc
+
+# VS Code
+.vscode/
+
+# Streamlit Cache
+.streamlit/
+
+# Generated Resume Files
+generated_resume/
+
+# OS Files
+.DS_Store
+Thumbs.db
+
+# Logs
+*.log
